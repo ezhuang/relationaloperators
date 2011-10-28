@@ -9,11 +9,26 @@ import heap.HeapFile;
  */
 public class FileScan extends Iterator {
 
+  private HeapScan scan;
+  private HeapFile file;
+  private Schema schema;
+
+  private boolean isOpen;
+  private RID lastRID;
+
   /**
    * Constructs a file scan, given the schema and heap file.
    */
   public FileScan(Schema schema, HeapFile file) {
-    throw new UnsupportedOperationException("Not implemented");
+    this.schema = schema;
+    this.file = file;
+    init();
+  }
+
+  private void init() {
+    scan = file.openScan();
+    isOpen = true;
+    lastRID = null;
   }
 
   /**
@@ -28,28 +43,30 @@ public class FileScan extends Iterator {
    * Restarts the iterator, i.e. as if it were just constructed.
    */
   public void restart() {
-    throw new UnsupportedOperationException("Not implemented");
+    scan.close();
+    init();
   }
 
   /**
    * Returns true if the iterator is open; false otherwise.
    */
   public boolean isOpen() {
-    throw new UnsupportedOperationException("Not implemented");
+    return isOpen;
   }
 
   /**
    * Closes the iterator, releasing any resources (i.e. pinned pages).
    */
   public void close() {
-    throw new UnsupportedOperationException("Not implemented");
+    isOpen = false;
+    scan.close();
   }
 
   /**
    * Returns true if there are more tuples, false otherwise.
    */
   public boolean hasNext() {
-    throw new UnsupportedOperationException("Not implemented");
+    return isOpen ? scan.hasNext() : false;
   }
 
   /**
@@ -58,14 +75,15 @@ public class FileScan extends Iterator {
    * @throws IllegalStateException if no more tuples
    */
   public Tuple getNext() {
-    throw new UnsupportedOperationException("Not implemented");
+    if (false == hasNext()) throw new IllegalStateException();
+    return new Tuple(schema, scan.getNext(lastRID));
   }
 
   /**
    * Gets the RID of the last tuple returned.
    */
   public RID getLastRID() {
-    throw new UnsupportedOperationException("Not implemented");
+    return lastRID;
   }
 
 } // public class FileScan extends Iterator
