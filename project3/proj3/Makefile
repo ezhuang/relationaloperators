@@ -8,24 +8,21 @@
 
 SRCPATH=src
 BINPATH=bin
-BUFJARS=lib/bufmgr.jar  
-DSKJARS=lib/diskmgr.jar  
-HEPJARS=lib/heap.jar  
-INDJARS=lib/index.jar
 SOLJARS=lib/heap.jar:lib/bufmgr.jar:lib/diskmgr.jar:lib/index.jar
 
-JAVAC = javac -d $(BINPATH) -classpath $(SOLJARS)
+JAVAC = javac -d $(BINPATH) -classpath $(BINPATH):$(SOLJARS)
 JAVA  = java -classpath $(BINPATH):$(SOLJARS)
 
-all: relop tests
+all: global relop tests
 
+global:
+	$(JAVAC) $(SRCPATH)/global/*.java
 relop:
 	$(JAVAC) $(SRCPATH)/relop/*.java
-	cp $(SRCPATH)/relop/*.class $(BINPATH)/relop/
 tests:
 	$(JAVAC) $(SRCPATH)/tests/*.java
 
-hftest:
+rotest:
 	$(JAVA) tests.ROTest
 
 

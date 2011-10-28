@@ -1,6 +1,7 @@
 package relop;
 
 import global.SearchKey;
+import global.RID;
 import heap.HeapFile;
 import index.HashIndex;
 import index.BucketScan;
@@ -16,7 +17,6 @@ public class IndexScan extends Iterator {
   private BucketScan scan;
 
   private boolean isOpen;
-  private RID lastRID;
 
   /**
    * Constructs an index scan, given the hash index and schema.
@@ -29,9 +29,8 @@ public class IndexScan extends Iterator {
   }
 
   private void init() {
-    scan = new BucketScan(index);
+    scan = index.openScan();
     isOpen = true;
-    lastRID = null;
   }
 
   /**
@@ -79,7 +78,7 @@ public class IndexScan extends Iterator {
    */
   public Tuple getNext() {
     if (false == hasNext()) throw new IllegalStateException();
-    return new Tuple(schema, file.selectRecord(scan.getNext(lastRID)));
+    return new Tuple(schema, file.selectRecord(scan.getNext()));
   }
 
   /**

@@ -2,6 +2,7 @@ package relop;
 
 import global.RID;
 import heap.HeapFile;
+import heap.HeapScan;
 
 /**
  * Wrapper for heap file scan, the most basic access method. This "iterator"

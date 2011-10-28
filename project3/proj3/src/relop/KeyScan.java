@@ -1,8 +1,10 @@
 package relop;
 
 import global.SearchKey;
+import global.RID;
 import heap.HeapFile;
 import index.HashIndex;
+import index.HashScan;
 
 /**
  * Wrapper for hash scan, an index access method.
@@ -16,7 +18,6 @@ public class KeyScan extends Iterator {
   private HashScan scan;
 
   private boolean isOpen;
-  private RID lastRID;
 
   /**
    * Constructs an index scan, given the hash index and schema.
@@ -30,9 +31,8 @@ public class KeyScan extends Iterator {
   }
 
   private void init() {
-    scan = new HashScan(index, key);
+    scan = index.openScan(key);
     isOpen = true;
-    lastRID = null;
   }
 
   /**
@@ -70,7 +70,7 @@ public class KeyScan extends Iterator {
    * Returns true if there are more tuples, false otherwise.
    */
   public boolean hasNext() {
-    return isOpen ? scan.hashNext() : false;
+    return isOpen ? scan.hasNext() : false;
   }
 
   /**
@@ -80,7 +80,7 @@ public class KeyScan extends Iterator {
    */
   public Tuple getNext() {
     if (false == hasNext()) throw new IllegalStateException();
-    return new Tuple(schema, file.selectRecord(scan.getNext(lastRID)));
+    return new Tuple(schema, file.selectRecord(scan.getNext()));
   }
 
 } // public class KeyScan extends Iterator
