@@ -1,0 +1,300 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.7	//
+AttrOperator	src/global/AttrOperator.java	/^  private AttrOperator() {}$/;"	m	class:AttrOperator	file:
+AttrOperator	src/global/AttrOperator.java	/^public class AttrOperator {$/;"	c
+AttrType	src/global/AttrType.java	/^  private AttrType() {}$/;"	m	class:AttrType	file:
+AttrType	src/global/AttrType.java	/^public class AttrType {$/;"	c
+BUF_POLICY	src/tests/TestDriver.java	/^  protected String BUF_POLICY = "Clock";$/;"	f	class:TestDriver
+BUF_SIZE	src/tests/TestDriver.java	/^  protected int BUF_SIZE = 100;$/;"	f	class:TestDriver
+BufferManager	src/global/Minibase.java	/^  public static BufMgr BufferManager;$/;"	f	class:Minibase
+COLNAME	src/global/AttrType.java	/^  public static final int COLNAME = 21;$/;"	f	class:AttrType
+Convert	src/global/Convert.java	/^public class Convert {$/;"	c
+CountData	src/tests/TestDriver.java	/^  protected class CountData {$/;"	c	class:TestDriver
+DB_PATH	src/tests/TestDriver.java	/^  protected String DB_PATH = System.getProperty("user.name") + ".minibase";$/;"	f	class:TestDriver
+DB_SIZE	src/tests/TestDriver.java	/^  protected int DB_SIZE = 10000;$/;"	f	class:TestDriver
+DatabaseName	src/global/Minibase.java	/^  public static String DatabaseName;$/;"	f	class:Minibase
+DiskManager	src/global/Minibase.java	/^  public static DiskMgr DiskManager;$/;"	f	class:Minibase
+EMPTY_SLOT	src/global/GlobalConst.java	/^  public static final int EMPTY_SLOT = -1;$/;"	f	interface:GlobalConst
+EQ	src/global/AttrOperator.java	/^  public static final int EQ = 11;$/;"	f	class:AttrOperator
+FAIL	src/tests/TestDriver.java	/^  protected static final boolean FAIL = false;$/;"	f	class:TestDriver
+FIELDNO	src/global/AttrType.java	/^  public static final int FIELDNO = 22;$/;"	f	class:AttrType
+FIRST_PAGEID	src/global/GlobalConst.java	/^  public static final int FIRST_PAGEID = 0;$/;"	f	interface:GlobalConst
+FLOAT	src/global/AttrType.java	/^  public static final int FLOAT = 12;$/;"	f	class:AttrType
+FLOAT_KEY	src/global/SearchKey.java	/^  protected static final byte FLOAT_KEY = 2;$/;"	f	class:SearchKey
+FileScan	src/relop/FileScan.java	/^  public FileScan(Schema schema, HeapFile file) {$/;"	m	class:FileScan
+FileScan	src/relop/FileScan.java	/^public class FileScan extends Iterator {$/;"	c
+GT	src/global/AttrOperator.java	/^  public static final int GT = 13;$/;"	f	class:AttrOperator
+GTE	src/global/AttrOperator.java	/^  public static final int GTE = 14;$/;"	f	class:AttrOperator
+GlobalConst	src/global/GlobalConst.java	/^public interface GlobalConst {$/;"	i
+HashJoin	src/relop/HashJoin.java	/^  public HashJoin(Iterator left, Iterator right, Integer lcol, Integer rcol) {$/;"	m	class:HashJoin
+HashJoin	src/relop/HashJoin.java	/^public class HashJoin extends Iterator {$/;"	c
+HashTableDup	src/relop/HashTableDup.java	/^class HashTableDup extends Hashtable {$/;"	c
+INTEGER	src/global/AttrType.java	/^  public static final int INTEGER = 11;$/;"	f	class:AttrType
+INTEGER_KEY	src/global/SearchKey.java	/^  protected static final byte INTEGER_KEY = 1;$/;"	f	class:SearchKey
+INVALID_PAGEID	src/global/GlobalConst.java	/^  public static final int INVALID_PAGEID = -1;$/;"	f	interface:GlobalConst
+IndexScan	src/relop/IndexScan.java	/^  public IndexScan(Schema schema, HashIndex index, HeapFile file) {$/;"	m	class:IndexScan
+IndexScan	src/relop/IndexScan.java	/^public class IndexScan extends Iterator {$/;"	c
+Iterator	src/relop/Iterator.java	/^public abstract class Iterator {$/;"	c
+KeyScan	src/relop/KeyScan.java	/^  public KeyScan(Schema schema, HashIndex index, SearchKey key, HeapFile file) {$/;"	m	class:KeyScan
+KeyScan	src/relop/KeyScan.java	/^public class KeyScan extends Iterator {$/;"	c
+LT	src/global/AttrOperator.java	/^  public static final int LT = 15;$/;"	f	class:AttrOperator
+LTE	src/global/AttrOperator.java	/^  public static final int LTE = 16;$/;"	f	class:AttrOperator
+MAX_COLSIZE	src/global/GlobalConst.java	/^  public static final int MAX_COLSIZE = 1001;$/;"	f	interface:GlobalConst
+MAX_TUPSIZE	src/global/GlobalConst.java	/^  public static final int MAX_TUPSIZE = 1004;$/;"	f	interface:GlobalConst
+MIN_WIDTH	src/relop/Schema.java	/^  public static final int MIN_WIDTH = 10;$/;"	f	class:Schema
+Minibase	src/global/Minibase.java	/^  public Minibase(String dbname, int num_pgs, int bufpoolsize,$/;"	m	class:Minibase
+Minibase	src/global/Minibase.java	/^public class Minibase {$/;"	c
+NAME_MAXLEN	src/global/GlobalConst.java	/^  public static final int NAME_MAXLEN = 50;$/;"	f	interface:GlobalConst
+NEQ	src/global/AttrOperator.java	/^  public static final int NEQ = 12;$/;"	f	class:AttrOperator
+PAGE_SIZE	src/global/GlobalConst.java	/^  public static final int PAGE_SIZE = 1024;$/;"	f	interface:GlobalConst
+PASS	src/tests/TestDriver.java	/^  protected static final boolean PASS = true;$/;"	f	class:TestDriver
+PIN_DISKIO	src/global/GlobalConst.java	/^  public static final boolean PIN_DISKIO = false;$/;"	f	interface:GlobalConst
+PIN_MEMCPY	src/global/GlobalConst.java	/^  public static final boolean PIN_MEMCPY = true;$/;"	f	interface:GlobalConst
+Page	src/global/Page.java	/^  public Page() {$/;"	m	class:Page
+Page	src/global/Page.java	/^  public Page(byte[] data) {$/;"	m	class:Page
+Page	src/global/Page.java	/^public class Page implements GlobalConst {$/;"	c
+PageId	src/global/PageId.java	/^  public PageId() {$/;"	m	class:PageId
+PageId	src/global/PageId.java	/^  public PageId(int pid) {$/;"	m	class:PageId
+PageId	src/global/PageId.java	/^public class PageId implements GlobalConst {$/;"	c
+Predicate	src/relop/Predicate.java	/^  public Predicate(int oper, int ltype, Object left, int rtype, Object right) {$/;"	m	class:Predicate
+Predicate	src/relop/Predicate.java	/^public class Predicate {$/;"	c
+Projection	src/relop/Projection.java	/^  public Projection(Iterator iter, Integer... fields) {$/;"	m	class:Projection
+Projection	src/relop/Projection.java	/^public class Projection extends Iterator {$/;"	c
+RID	src/global/RID.java	/^  public RID() {$/;"	m	class:RID
+RID	src/global/RID.java	/^  public RID(PageId pageno, int slotno) {$/;"	m	class:RID
+RID	src/global/RID.java	/^  public RID(RID rid) {$/;"	m	class:RID
+RID	src/global/RID.java	/^  public RID(byte[] data, short offset) {$/;"	m	class:RID
+RID	src/global/RID.java	/^public class RID {$/;"	c
+ROTest	src/tests/ROTest.java	/^class ROTest extends TestDriver {$/;"	c
+STRING	src/global/AttrType.java	/^  public static final int STRING = 13;$/;"	f	class:AttrType
+STRING_KEY	src/global/SearchKey.java	/^  protected static final byte STRING_KEY = 3;$/;"	f	class:SearchKey
+SUPER_SIZE	src/tests/ROTest.java	/^  private static final int SUPER_SIZE = 2000;$/;"	f	class:ROTest	file:
+Schema	src/relop/Schema.java	/^  public Schema(int fldcnt) {$/;"	m	class:Schema
+Schema	src/relop/Schema.java	/^public class Schema {$/;"	c
+SearchKey	src/global/SearchKey.java	/^  public SearchKey(Float value) {$/;"	m	class:SearchKey
+SearchKey	src/global/SearchKey.java	/^  public SearchKey(Integer value) {$/;"	m	class:SearchKey
+SearchKey	src/global/SearchKey.java	/^  public SearchKey(Object value) {$/;"	m	class:SearchKey
+SearchKey	src/global/SearchKey.java	/^  public SearchKey(SearchKey key) {$/;"	m	class:SearchKey
+SearchKey	src/global/SearchKey.java	/^  public SearchKey(String value) {$/;"	m	class:SearchKey
+SearchKey	src/global/SearchKey.java	/^  public SearchKey(byte[] data, short offset) {$/;"	m	class:SearchKey
+SearchKey	src/global/SearchKey.java	/^public class SearchKey implements Comparable<SearchKey> {$/;"	c
+Selection	src/relop/Selection.java	/^  public Selection(Iterator iter, Predicate... preds) {$/;"	m	class:Selection
+Selection	src/relop/Selection.java	/^public class Selection extends Iterator {$/;"	c
+SimpleJoin	src/relop/SimpleJoin.java	/^  public SimpleJoin(Iterator left, Iterator right, Predicate... preds) {$/;"	m	class:SimpleJoin
+SimpleJoin	src/relop/SimpleJoin.java	/^public class SimpleJoin extends Iterator {$/;"	c
+SortKey	src/global/SortKey.java	/^  public SortKey(Object field, boolean isDesc) {$/;"	m	class:SortKey
+SortKey	src/global/SortKey.java	/^public class SortKey {$/;"	c
+TEST_NAME	src/tests/ROTest.java	/^  private static final String TEST_NAME = "relational operator tests";$/;"	f	class:ROTest	file:
+TestDriver	src/tests/TestDriver.java	/^class TestDriver implements GlobalConst {$/;"	c
+Tuple	src/relop/Tuple.java	/^  public Tuple(Schema schema) {$/;"	m	class:Tuple
+Tuple	src/relop/Tuple.java	/^  public Tuple(Schema schema, Object... values) {$/;"	m	class:Tuple
+Tuple	src/relop/Tuple.java	/^  public Tuple(Schema schema, byte[] data) {$/;"	m	class:Tuple
+Tuple	src/relop/Tuple.java	/^public class Tuple {$/;"	c
+UNPIN_CLEAN	src/global/GlobalConst.java	/^  public static final boolean UNPIN_CLEAN = false;$/;"	f	interface:GlobalConst
+UNPIN_DIRTY	src/global/GlobalConst.java	/^  public static final boolean UNPIN_DIRTY = true;$/;"	f	interface:GlobalConst
+add	src/relop/HashTableDup.java	/^  public void add(SearchKey key, Tuple value) {$/;"	m	class:HashTableDup
+allocs	src/tests/TestDriver.java	/^    public int allocs;$/;"	f	class:TestDriver.CountData
+close	src/relop/FileScan.java	/^  public void close() {$/;"	m	class:FileScan
+close	src/relop/HashJoin.java	/^  public void close() {$/;"	m	class:HashJoin
+close	src/relop/IndexScan.java	/^  public void close() {$/;"	m	class:IndexScan
+close	src/relop/Iterator.java	/^  public abstract void close();$/;"	m	class:Iterator
+close	src/relop/KeyScan.java	/^  public void close() {$/;"	m	class:KeyScan
+close	src/relop/Projection.java	/^  public void close() {$/;"	m	class:Projection
+close	src/relop/Selection.java	/^  public void close() {$/;"	m	class:Selection
+close	src/relop/SimpleJoin.java	/^  public void close() {$/;"	m	class:SimpleJoin
+compareTo	src/global/SearchKey.java	/^  public int compareTo(SearchKey key) {$/;"	m	class:SearchKey
+copyPage	src/global/Page.java	/^  public void copyPage(Page page) {$/;"	m	class:Page
+copyPageId	src/global/PageId.java	/^  public void copyPageId(PageId pageNo) {$/;"	m	class:PageId
+copyRID	src/global/RID.java	/^  public void copyRID(RID rid) {$/;"	m	class:RID
+counts	src/tests/TestDriver.java	/^  protected ArrayList<CountData> counts;$/;"	f	class:TestDriver
+create_minibase	src/tests/TestDriver.java	/^  protected void create_minibase() {$/;"	m	class:TestDriver
+data	src/global/Page.java	/^  protected byte[] data;$/;"	f	class:Page
+data	src/relop/Tuple.java	/^  protected byte[] data;$/;"	f	class:Tuple
+delete_minibase	src/tests/TestDriver.java	/^  protected void delete_minibase() {$/;"	m	class:TestDriver
+desc	src/tests/TestDriver.java	/^    public String desc;$/;"	f	class:TestDriver.CountData
+equals	src/global/PageId.java	/^  public boolean equals(Object obj) {$/;"	m	class:PageId
+equals	src/global/RID.java	/^  public boolean equals(Object obj) {$/;"	m	class:RID
+equals	src/global/SearchKey.java	/^  public boolean equals(Object obj) {$/;"	m	class:SearchKey
+evaluate	src/relop/Predicate.java	/^  public boolean evaluate(Tuple tuple) {$/;"	m	class:Predicate
+execute	src/relop/Iterator.java	/^  public int execute() {$/;"	m	class:Iterator
+explain	src/relop/FileScan.java	/^  public void explain(int depth) {$/;"	m	class:FileScan
+explain	src/relop/HashJoin.java	/^  public void explain(int depth) {$/;"	m	class:HashJoin
+explain	src/relop/IndexScan.java	/^  public void explain(int depth) {$/;"	m	class:IndexScan
+explain	src/relop/Iterator.java	/^  public abstract void explain(int depth);$/;"	m	class:Iterator
+explain	src/relop/KeyScan.java	/^  public void explain(int depth) {$/;"	m	class:KeyScan
+explain	src/relop/Projection.java	/^  public void explain(int depth) {$/;"	m	class:Projection
+explain	src/relop/Selection.java	/^  public void explain(int depth) {$/;"	m	class:Selection
+explain	src/relop/SimpleJoin.java	/^  public void explain(int depth) {$/;"	m	class:SimpleJoin
+field	src/global/SortKey.java	/^  public Object field;$/;"	f	class:SortKey
+fieldLength	src/relop/Schema.java	/^  public int fieldLength(int fldno) {$/;"	m	class:Schema
+fieldName	src/relop/Schema.java	/^  public String fieldName(int fldno) {$/;"	m	class:Schema
+fieldNumber	src/relop/Schema.java	/^  public int fieldNumber(String name) {$/;"	m	class:Schema
+fieldOffset	src/relop/Schema.java	/^  public int fieldOffset(int fldno) {$/;"	m	class:Schema
+fieldType	src/relop/Schema.java	/^  public int fieldType(int fldno) {$/;"	m	class:Schema
+finalize	src/relop/Iterator.java	/^  protected void finalize() throws Throwable {$/;"	m	class:Iterator
+getAll	src/relop/HashTableDup.java	/^  public Tuple[] getAll(SearchKey key) {$/;"	m	class:HashTableDup
+getAllFields	src/relop/Tuple.java	/^  public Object[] getAllFields() {$/;"	m	class:Tuple
+getCharValue	src/global/Convert.java	/^  public static char getCharValue(int pos, byte[] data) {$/;"	m	class:Convert
+getCharValue	src/global/Page.java	/^  public char getCharValue(int offset) {$/;"	m	class:Page
+getCount	src/relop/Schema.java	/^  public int getCount() {$/;"	m	class:Schema
+getData	src/global/Page.java	/^  public byte[] getData() {$/;"	m	class:Page
+getData	src/relop/Tuple.java	/^  public byte[] getData() {$/;"	m	class:Tuple
+getField	src/relop/Tuple.java	/^  public Object getField(String fldName) {$/;"	m	class:Tuple
+getField	src/relop/Tuple.java	/^  public Object getField(int fldno) {$/;"	m	class:Tuple
+getFloatFld	src/relop/Tuple.java	/^  public float getFloatFld(int fldno) {$/;"	m	class:Tuple
+getFloatValue	src/global/Convert.java	/^  public static float getFloatValue(int pos, byte[] data) {$/;"	m	class:Convert
+getFloatValue	src/global/Page.java	/^  public float getFloatValue(int offset) {$/;"	m	class:Page
+getHash	src/global/SearchKey.java	/^  public int getHash(int depth) {$/;"	m	class:SearchKey
+getIntFld	src/relop/Tuple.java	/^  public int getIntFld(int fldno) {$/;"	m	class:Tuple
+getIntValue	src/global/Convert.java	/^  public static int getIntValue(int pos, byte[] data) {$/;"	m	class:Convert
+getIntValue	src/global/Page.java	/^  public int getIntValue(int offset) {$/;"	m	class:Page
+getLastKey	src/relop/IndexScan.java	/^  public SearchKey getLastKey() {$/;"	m	class:IndexScan
+getLastRID	src/relop/FileScan.java	/^  public RID getLastRID() {$/;"	m	class:FileScan
+getLength	src/global/RID.java	/^  public short getLength() {$/;"	m	class:RID
+getLength	src/global/SearchKey.java	/^  public short getLength() {$/;"	m	class:SearchKey
+getLength	src/relop/Schema.java	/^  public int getLength() {$/;"	m	class:Schema
+getNext	src/relop/FileScan.java	/^  public Tuple getNext() {$/;"	m	class:FileScan
+getNext	src/relop/HashJoin.java	/^  public Tuple getNext() {$/;"	m	class:HashJoin
+getNext	src/relop/IndexScan.java	/^  public Tuple getNext() {$/;"	m	class:IndexScan
+getNext	src/relop/Iterator.java	/^  public abstract Tuple getNext();$/;"	m	class:Iterator
+getNext	src/relop/KeyScan.java	/^  public Tuple getNext() {$/;"	m	class:KeyScan
+getNext	src/relop/Projection.java	/^  public Tuple getNext() {$/;"	m	class:Projection
+getNext	src/relop/Selection.java	/^  public Tuple getNext() {$/;"	m	class:Selection
+getNext	src/relop/SimpleJoin.java	/^  public Tuple getNext() {$/;"	m	class:SimpleJoin
+getNextHash	src/relop/IndexScan.java	/^  public int getNextHash() {$/;"	m	class:IndexScan
+getShortValue	src/global/Convert.java	/^  public static short getShortValue(int pos, byte[] data) {$/;"	m	class:Convert
+getShortValue	src/global/Page.java	/^  public short getShortValue(int offset) {$/;"	m	class:Page
+getStringFld	src/relop/Tuple.java	/^  public String getStringFld(int fldno) {$/;"	m	class:Tuple
+getStringValue	src/global/Convert.java	/^  public static String getStringValue(int pos, byte[] data, int length) {$/;"	m	class:Convert
+getStringValue	src/global/Page.java	/^  public String getStringValue(int offset, int length) {$/;"	m	class:Page
+getType	src/global/AttrType.java	/^  public static int getType(Object obj) {$/;"	m	class:AttrType
+global	src/global/AttrOperator.java	/^package global;$/;"	p
+global	src/global/AttrType.java	/^package global;$/;"	p
+global	src/global/Convert.java	/^package global;$/;"	p
+global	src/global/GlobalConst.java	/^package global;$/;"	p
+global	src/global/Minibase.java	/^package global;$/;"	p
+global	src/global/Page.java	/^package global;$/;"	p
+global	src/global/PageId.java	/^package global;$/;"	p
+global	src/global/RID.java	/^package global;$/;"	p
+global	src/global/SearchKey.java	/^package global;$/;"	p
+global	src/global/SortKey.java	/^package global;$/;"	p
+haltSystem	src/global/Minibase.java	/^  public static void haltSystem(Exception exc) {$/;"	m	class:Minibase
+hasNext	src/relop/FileScan.java	/^  public boolean hasNext() {$/;"	m	class:FileScan
+hasNext	src/relop/HashJoin.java	/^  public boolean hasNext() {$/;"	m	class:HashJoin
+hasNext	src/relop/IndexScan.java	/^  public boolean hasNext() {$/;"	m	class:IndexScan
+hasNext	src/relop/Iterator.java	/^  public abstract boolean hasNext();$/;"	m	class:Iterator
+hasNext	src/relop/KeyScan.java	/^  public boolean hasNext() {$/;"	m	class:KeyScan
+hasNext	src/relop/Projection.java	/^  public boolean hasNext() {$/;"	m	class:Projection
+hasNext	src/relop/Selection.java	/^  public boolean hasNext() {$/;"	m	class:Selection
+hasNext	src/relop/SimpleJoin.java	/^  public boolean hasNext() {$/;"	m	class:SimpleJoin
+hashCode	src/global/PageId.java	/^  public int hashCode() {$/;"	m	class:PageId
+hashCode	src/global/RID.java	/^  public int hashCode() {$/;"	m	class:RID
+hashCode	src/global/SearchKey.java	/^  public int hashCode() {$/;"	m	class:SearchKey
+indent	src/relop/Iterator.java	/^  protected void indent(int depth) {$/;"	m	class:Iterator
+init	src/global/Minibase.java	/^  public void init(String dbname, int num_pgs, int bufpoolsize,$/;"	m	class:Minibase
+initCounts	src/tests/TestDriver.java	/^  protected void initCounts() {$/;"	m	class:TestDriver
+initField	src/relop/Schema.java	/^  public void initField(int fldno, Schema schema, int srcno) {$/;"	m	class:Schema
+initField	src/relop/Schema.java	/^  public void initField(int fldno, int type, int length, String name) {$/;"	m	class:Schema
+initRandom	src/tests/TestDriver.java	/^  protected void initRandom() {$/;"	m	class:TestDriver
+insertIntoFile	src/relop/Tuple.java	/^  public RID insertIntoFile(HeapFile file) {$/;"	m	class:Tuple
+isDesc	src/global/SortKey.java	/^  public boolean isDesc;$/;"	f	class:SortKey
+isHash	src/global/SearchKey.java	/^  public boolean isHash(int hash) {$/;"	m	class:SearchKey
+isOpen	src/relop/FileScan.java	/^  public boolean isOpen() {$/;"	m	class:FileScan
+isOpen	src/relop/HashJoin.java	/^  public boolean isOpen() {$/;"	m	class:HashJoin
+isOpen	src/relop/IndexScan.java	/^  public boolean isOpen() {$/;"	m	class:IndexScan
+isOpen	src/relop/Iterator.java	/^  public abstract boolean isOpen();$/;"	m	class:Iterator
+isOpen	src/relop/KeyScan.java	/^  public boolean isOpen() {$/;"	m	class:KeyScan
+isOpen	src/relop/Projection.java	/^  public boolean isOpen() {$/;"	m	class:Projection
+isOpen	src/relop/Selection.java	/^  public boolean isOpen() {$/;"	m	class:Selection
+isOpen	src/relop/SimpleJoin.java	/^  public boolean isOpen() {$/;"	m	class:SimpleJoin
+join	src/relop/Schema.java	/^  public static Schema join(Schema s1, Schema s2) {$/;"	m	class:Schema
+join	src/relop/Tuple.java	/^  public static Tuple join(Tuple t1, Tuple t2, Schema schema) {$/;"	m	class:Tuple
+left	src/relop/Predicate.java	/^  protected Object left;$/;"	f	class:Predicate
+lengths	src/relop/Schema.java	/^  protected int[] lengths;$/;"	f	class:Schema
+load_minibase	src/tests/TestDriver.java	/^  protected void load_minibase() {$/;"	m	class:TestDriver
+ltype	src/relop/Predicate.java	/^  protected int ltype;$/;"	f	class:Predicate
+main	src/tests/ROTest.java	/^  public static void main(String argv[]) {$/;"	m	class:ROTest
+names	src/relop/Schema.java	/^  protected String[] names;$/;"	f	class:Schema
+offsets	src/relop/Schema.java	/^  protected int[] offsets;$/;"	f	class:Schema
+opString	src/relop/Predicate.java	/^  protected String opString(int type, Object operand) {$/;"	m	class:Predicate
+oper	src/relop/Predicate.java	/^  protected int oper;$/;"	f	class:Predicate
+padOutput	src/relop/Tuple.java	/^  protected void padOutput(int fieldLen, int outputLen) {$/;"	m	class:Tuple
+pageno	src/global/RID.java	/^  public PageId pageno;$/;"	f	class:RID
+pid	src/global/PageId.java	/^  public int pid;$/;"	f	class:PageId
+pinned	src/tests/TestDriver.java	/^    public int pinned;$/;"	f	class:TestDriver.CountData
+print	src/relop/Schema.java	/^  public void print() {$/;"	m	class:Schema
+print	src/relop/Tuple.java	/^  public void print() {$/;"	m	class:Tuple
+printCounters	src/tests/TestDriver.java	/^  protected void printCounters() {$/;"	m	class:TestDriver
+printSummary	src/tests/TestDriver.java	/^  protected void printSummary(int sepcnt) {$/;"	m	class:TestDriver
+random	src/tests/TestDriver.java	/^  protected Random random;$/;"	f	class:TestDriver
+reads	src/tests/TestDriver.java	/^    public int reads;$/;"	f	class:TestDriver.CountData
+relop	src/relop/FileScan.java	/^package relop;$/;"	p
+relop	src/relop/HashJoin.java	/^package relop;$/;"	p
+relop	src/relop/HashTableDup.java	/^package relop;$/;"	p
+relop	src/relop/IndexScan.java	/^package relop;$/;"	p
+relop	src/relop/Iterator.java	/^package relop;$/;"	p
+relop	src/relop/KeyScan.java	/^package relop;$/;"	p
+relop	src/relop/Predicate.java	/^package relop;$/;"	p
+relop	src/relop/Projection.java	/^package relop;$/;"	p
+relop	src/relop/Schema.java	/^package relop;$/;"	p
+relop	src/relop/Selection.java	/^package relop;$/;"	p
+relop	src/relop/SimpleJoin.java	/^package relop;$/;"	p
+relop	src/relop/Tuple.java	/^package relop;$/;"	p
+restart	src/relop/FileScan.java	/^  public void restart() {$/;"	m	class:FileScan
+restart	src/relop/HashJoin.java	/^  public void restart() {$/;"	m	class:HashJoin
+restart	src/relop/IndexScan.java	/^  public void restart() {$/;"	m	class:IndexScan
+restart	src/relop/Iterator.java	/^  public abstract void restart();$/;"	m	class:Iterator
+restart	src/relop/KeyScan.java	/^  public void restart() {$/;"	m	class:KeyScan
+restart	src/relop/Projection.java	/^  public void restart() {$/;"	m	class:Projection
+restart	src/relop/Selection.java	/^  public void restart() {$/;"	m	class:Selection
+restart	src/relop/SimpleJoin.java	/^  public void restart() {$/;"	m	class:SimpleJoin
+right	src/relop/Predicate.java	/^  protected Object right;$/;"	f	class:Predicate
+rtype	src/relop/Predicate.java	/^  protected int rtype;$/;"	f	class:Predicate
+s_drivers	src/tests/ROTest.java	/^  private static Schema s_drivers;$/;"	f	class:ROTest	file:
+s_groups	src/tests/ROTest.java	/^  private static Schema s_groups;$/;"	f	class:ROTest	file:
+s_rides	src/tests/ROTest.java	/^  private static Schema s_rides;$/;"	f	class:ROTest	file:
+saveCounts	src/tests/TestDriver.java	/^  protected void saveCounts(String desc) {$/;"	m	class:TestDriver
+schema	src/relop/Iterator.java	/^  protected Schema schema;$/;"	f	class:Iterator
+schema	src/relop/Tuple.java	/^  protected Schema schema;$/;"	f	class:Tuple
+setAllFields	src/relop/Tuple.java	/^  public void setAllFields(Object... values) {$/;"	m	class:Tuple
+setCharValue	src/global/Convert.java	/^  public static void setCharValue(char value, int pos, byte[] data) {$/;"	m	class:Convert
+setCharValue	src/global/Page.java	/^  public void setCharValue(char value, int offset) {$/;"	m	class:Page
+setData	src/global/Page.java	/^  public void setData(byte[] data) {$/;"	m	class:Page
+setField	src/relop/Tuple.java	/^  public void setField(String fldName, Object val) {$/;"	m	class:Tuple
+setField	src/relop/Tuple.java	/^  public void setField(int fldno, Object val) {$/;"	m	class:Tuple
+setFloatFld	src/relop/Tuple.java	/^  public void setFloatFld(int fldno, float val) {$/;"	m	class:Tuple
+setFloatValue	src/global/Convert.java	/^  public static void setFloatValue(float value, int pos, byte[] data) {$/;"	m	class:Convert
+setFloatValue	src/global/Page.java	/^  public void setFloatValue(float value, int offset) {$/;"	m	class:Page
+setIntFld	src/relop/Tuple.java	/^  public void setIntFld(int fldno, int val) {$/;"	m	class:Tuple
+setIntValue	src/global/Convert.java	/^  public static void setIntValue(int value, int pos, byte[] data) {$/;"	m	class:Convert
+setIntValue	src/global/Page.java	/^  public void setIntValue(int value, int offset) {$/;"	m	class:Page
+setPage	src/global/Page.java	/^  public void setPage(Page page) {$/;"	m	class:Page
+setShortValue	src/global/Convert.java	/^  public static void setShortValue(short value, int pos, byte[] data) {$/;"	m	class:Convert
+setShortValue	src/global/Page.java	/^  public void setShortValue(short value, int offset) {$/;"	m	class:Page
+setStringFld	src/relop/Tuple.java	/^  public void setStringFld(int fldno, String val) {$/;"	m	class:Tuple
+setStringValue	src/global/Convert.java	/^  public static void setStringValue(String value, int pos, byte[] data) {$/;"	m	class:Convert
+setStringValue	src/global/Page.java	/^  public void setStringValue(String value, int offset) {$/;"	m	class:Page
+size	src/global/SearchKey.java	/^  protected short size;$/;"	f	class:SearchKey
+slotno	src/global/RID.java	/^  public int slotno;$/;"	f	class:RID
+test1	src/tests/ROTest.java	/^  protected boolean test1() {$/;"	m	class:ROTest
+test2	src/tests/ROTest.java	/^  protected boolean test2() {$/;"	m	class:ROTest
+test3	src/tests/ROTest.java	/^  protected boolean test3() {$/;"	m	class:ROTest
+tests	src/tests/ROTest.java	/^package tests;$/;"	p
+tests	src/tests/TestDriver.java	/^package tests;$/;"	p
+toString	src/global/AttrOperator.java	/^  public static String toString(int value) {$/;"	m	class:AttrOperator
+toString	src/global/AttrType.java	/^  public static String toString(int value) {$/;"	m	class:AttrType
+toString	src/global/PageId.java	/^  public String toString() {$/;"	m	class:PageId
+toString	src/global/RID.java	/^  public String toString() {$/;"	m	class:RID
+toString	src/relop/Predicate.java	/^  public String toString() {$/;"	m	class:Predicate
+toValue	src/global/AttrOperator.java	/^  public static int toValue(String str) {$/;"	m	class:AttrOperator
+type	src/global/SearchKey.java	/^  protected byte type;$/;"	f	class:SearchKey
+types	src/relop/Schema.java	/^  protected int[] types;$/;"	f	class:Schema
+validate	src/relop/Predicate.java	/^  public boolean validate(Schema schema) {$/;"	m	class:Predicate
+value	src/global/SearchKey.java	/^  protected Object value;$/;"	f	class:SearchKey
+writeData	src/global/RID.java	/^  public void writeData(byte[] data, short offset) {$/;"	m	class:RID
+writeData	src/global/SearchKey.java	/^  public void writeData(byte[] data, short offset) {$/;"	m	class:SearchKey
+writes	src/tests/TestDriver.java	/^    public int writes;$/;"	f	class:TestDriver.CountData
