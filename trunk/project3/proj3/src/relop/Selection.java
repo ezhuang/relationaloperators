@@ -1,5 +1,7 @@
 package relop;
 
+import java.util.ArrayList;
+
 /**
  * The selection operator specifies which tuples to retain under a condition; in
  * Minibase, this condition is simply a set of independent predicates logically
@@ -7,11 +9,19 @@ package relop;
  */
 public class Selection extends Iterator {
 
+  private Iterator iter;
+  private ArrayList<Predicate> preds = new ArrayList<Predicate>();
+  private boolean foundNext = false;
+  private Tuple next = null;
+
   /**
    * Constructs a selection, given the underlying iterator and predicates.
    */
   public Selection(Iterator iter, Predicate... preds) {
-    throw new UnsupportedOperationException("Not implemented");
+    this.iter = iter;
+    for ( Predicate pred : preds) {
+      this.pred.add(pred);
+    }
   }
 
   /**
@@ -19,35 +29,45 @@ public class Selection extends Iterator {
    * child iterators, and increases the indent depth along the way.
    */
   public void explain(int depth) {
-    throw new UnsupportedOperationException("Not implemented");
+    System.out.print("SELECT * WHERE ");
+    Iterator<Predicate> itr = preds.iterator();
+    while (itr.hasNext()) {
+      System.out.print(((Predicate)itr.next()).toString());
+    }
+    System.out.println("");
+    iter.explain(depth+1);
   }
 
   /**
    * Restarts the iterator, i.e. as if it were just constructed.
    */
   public void restart() {
-    throw new UnsupportedOperationException("Not implemented");
+    iter.restart();
+    foundNext = false;
+    next = null;
   }
 
   /**
    * Returns true if the iterator is open; false otherwise.
    */
   public boolean isOpen() {
-    throw new UnsupportedOperationException("Not implemented");
+    return iter.isOpen();
   }
 
   /**
    * Closes the iterator, releasing any resources (i.e. pinned pages).
    */
   public void close() {
-    throw new UnsupportedOperationException("Not implemented");
+    iter.close();
   }
 
   /**
    * Returns true if there are more tuples, false otherwise.
    */
   public boolean hasNext() {
-    throw new UnsupportedOperationException("Not implemented");
+    if (false == iter.hasNext()) return false;
+    if (false == foundNext) findNext();
+    return foundNext;
   }
 
   /**
@@ -56,7 +76,32 @@ public class Selection extends Iterator {
    * @throws IllegalStateException if no more tuples
    */
   public Tuple getNext() {
-    throw new UnsupportedOperationException("Not implemented");
+    if (false == iter.hasNext()) throw new IllegalStateException();
+    if (false == foundNext) findNext();
+    if (false == foundNext) throw new IllegalStateException();
+    return next;
+  }
+
+  private void findNext() {
+    foundNext = false;
+    while (!found && iter.hasNext()) {
+      Tuple t = iter.getNext();
+      if (true == qualify(t)) {
+        next = t;
+        foundNext = true;
+        return;
+      }
+    }
+  }
+
+  private boolean qualify(Tuple t) {
+    boolean retVal = false;
+    Iterator<Predicate> itr = preds.iterator();
+    while (itr.hasNext()) {
+      Predicate p = itr.next();
+      retVal |= p.evaluate(t);
+    }
+    return retVal;
   }
 
 } // public class Selection extends Iterator
