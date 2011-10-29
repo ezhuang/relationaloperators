@@ -20,7 +20,7 @@ public class Selection extends Iterator {
   public Selection(Iterator iter, Predicate... preds) {
     this.iter = iter;
     for ( Predicate pred : preds) {
-      this.pred.add(pred);
+      this.preds.add(pred);
     }
   }
 
@@ -30,7 +30,7 @@ public class Selection extends Iterator {
    */
   public void explain(int depth) {
     System.out.print("SELECT * WHERE ");
-    Iterator<Predicate> itr = preds.iterator();
+    java.util.Iterator<Predicate> itr = preds.iterator();
     while (itr.hasNext()) {
       System.out.print(((Predicate)itr.next()).toString());
     }
@@ -84,7 +84,7 @@ public class Selection extends Iterator {
 
   private void findNext() {
     foundNext = false;
-    while (!found && iter.hasNext()) {
+    while (!foundNext && iter.hasNext()) {
       Tuple t = iter.getNext();
       if (true == qualify(t)) {
         next = t;
@@ -96,7 +96,7 @@ public class Selection extends Iterator {
 
   private boolean qualify(Tuple t) {
     boolean retVal = false;
-    Iterator<Predicate> itr = preds.iterator();
+    java.util.Iterator<Predicate> itr = preds.iterator();
     while (itr.hasNext()) {
       Predicate p = itr.next();
       retVal |= p.evaluate(t);
