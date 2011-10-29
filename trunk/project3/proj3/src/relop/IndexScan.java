@@ -11,7 +11,6 @@ import index.BucketScan;
  */
 public class IndexScan extends Iterator {
 
-  private Schema schema;
   private HashIndex index;
   private HeapFile file;
   private BucketScan scan;
@@ -77,8 +76,9 @@ public class IndexScan extends Iterator {
    * @throws IllegalStateException if no more tuples
    */
   public Tuple getNext() {
-    if (false == hasNext()) throw new IllegalStateException();
-    return new Tuple(schema, file.selectRecord(scan.getNext()));
+    byte[] record = file.selectRecord(scan.getNext());
+    if (null == record) throw new IllegalStateException();
+    return new Tuple(schema, record);
   }
 
   /**

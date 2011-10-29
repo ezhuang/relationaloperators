@@ -12,7 +12,6 @@ public class FileScan extends Iterator {
 
   private HeapScan scan;
   private HeapFile file;
-  private Schema schema;
 
   private boolean isOpen;
   private RID lastRID;
@@ -76,8 +75,10 @@ public class FileScan extends Iterator {
    * @throws IllegalStateException if no more tuples
    */
   public Tuple getNext() {
-    if (false == hasNext()) throw new IllegalStateException();
-    return new Tuple(schema, scan.getNext(lastRID));
+    lastRID = new RID();
+    byte[] record = scan.getNext(lastRID);
+    if (null == record) throw new IllegalStateException();
+    return new Tuple(schema, record);
   }
 
   /**

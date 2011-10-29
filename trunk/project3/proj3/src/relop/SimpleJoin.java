@@ -6,12 +6,29 @@ package relop;
  */
 public class SimpleJoin extends Iterator {
 
+  private Iterator left = null,
+                   right = null;
+  private Predicate[] preds = null;
+  private boolean isOpen = false;
+  private boolean foundNext = false;
+  private Tuple next = null;
   /**
    * Constructs a join, given the left and right iterators and join predicates
    * (relative to the combined schema).
    */
   public SimpleJoin(Iterator left, Iterator right, Predicate... preds) {
-    throw new UnsupportedOperationException("Not implemented");
+    this.left = left;
+    this.right = right;
+    this.preds = preds;
+    init(); 
+  }
+
+  private void init() {
+    left.restart();
+    right.restart();
+    isOpen = true;
+    next = null;
+    foundNext = false;
   }
 
   /**
@@ -19,28 +36,33 @@ public class SimpleJoin extends Iterator {
    * child iterators, and increases the indent depth along the way.
    */
   public void explain(int depth) {
-    throw new UnsupportedOperationException("Not implemented");
+    indent(depth);
+    System.out.println("SIMPLE JOIN");
+    left.explain(depth+1);
+    right.explain(depth+1);
   }
 
   /**
    * Restarts the iterator, i.e. as if it were just constructed.
    */
   public void restart() {
-    throw new UnsupportedOperationException("Not implemented");
+    init();
   }
 
   /**
    * Returns true if the iterator is open; false otherwise.
    */
   public boolean isOpen() {
-    throw new UnsupportedOperationException("Not implemented");
+    return isOpen;
   }
 
   /**
    * Closes the iterator, releasing any resources (i.e. pinned pages).
    */
   public void close() {
-    throw new UnsupportedOperationException("Not implemented");
+    left.close();
+    right.close();
+    isOpen = false;
   }
 
   /**
@@ -57,6 +79,10 @@ public class SimpleJoin extends Iterator {
    */
   public Tuple getNext() {
     throw new UnsupportedOperationException("Not implemented");
+  }
+
+  private void findNext() {
+
   }
 
 } // public class SimpleJoin extends Iterator

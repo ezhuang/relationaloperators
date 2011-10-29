@@ -1,7 +1,5 @@
 package relop;
 
-import java.util.ArrayList;
-
 /**
  * The selection operator specifies which tuples to retain under a condition; in
  * Minibase, this condition is simply a set of independent predicates logically
@@ -9,19 +7,23 @@ import java.util.ArrayList;
  */
 public class Selection extends Iterator {
 
-  private Iterator iter;
-  private ArrayList<Predicate> preds = new ArrayList<Predicate>();
+  private Iterator iter = null;
+  private Predicate[] preds = null;
   private boolean foundNext = false;
   private Tuple next = null;
+  private boolean isOpen = false;
 
   /**
    * Constructs a selection, given the underlying iterator and predicates.
    */
   public Selection(Iterator iter, Predicate... preds) {
     this.iter = iter;
-    for ( Predicate pred : preds) {
-      this.preds.add(pred);
-    }
+    this.preds = preds;
+    this.schema = iter.schema;
+    iter.restart();
+    isOpen = true;
+    foundNext = false;
+    next = null;
   }
 
   /**
@@ -29,12 +31,8 @@ public class Selection extends Iterator {
    * child iterators, and increases the indent depth along the way.
    */
   public void explain(int depth) {
-    System.out.print("SELECT * WHERE ");
-    java.util.Iterator<Predicate> itr = preds.iterator();
-    while (itr.hasNext()) {
-      System.out.print(((Predicate)itr.next()).toString());
-    }
-    System.out.println("");
+    indent(depth);
+    System.out.print("SELECT");
     iter.explain(depth+1);
   }
 
@@ -43,15 +41,16 @@ public class Selection extends Iterator {
    */
   public void restart() {
     iter.restart();
-    foundNext = false;
+    isOpen = true;
     next = null;
+    foundNext = false;
   }
 
   /**
    * Returns true if the iterator is open; false otherwise.
    */
   public boolean isOpen() {
-    return iter.isOpen();
+    return isOpen;
   }
 
   /**
@@ -59,13 +58,15 @@ public class Selection extends Iterator {
    */
   public void close() {
     iter.close();
+    next = null;
+    isOpen = false;
+    foundNext = false;
   }
 
   /**
    * Returns true if there are more tuples, false otherwise.
    */
   public boolean hasNext() {
-    if (false == iter.hasNext()) return false;
     if (false == foundNext) findNext();
     return foundNext;
   }
@@ -76,9 +77,11 @@ public class Selection extends Iterator {
    * @throws IllegalStateException if no more tuples
    */
   public Tuple getNext() {
-    if (false == iter.hasNext()) throw new IllegalStateException();
-    if (false == foundNext) findNext();
+    if (false == foundNext) { 
+      findNext();
+    }
     if (false == foundNext) throw new IllegalStateException();
+    foundNext = false;
     return next;
   }
 
@@ -89,17 +92,17 @@ public class Selection extends Iterator {
       if (true == qualify(t)) {
         next = t;
         foundNext = true;
-        return;
       }
     }
   }
 
   private boolean qualify(Tuple t) {
     boolean retVal = false;
-    java.util.Iterator<Predicate> itr = preds.iterator();
-    while (itr.hasNext()) {
-      Predicate p = itr.next();
-      retVal |= p.evaluate(t);
+    for (Predicate p : preds) {
+      if(true == p.evaluate(t)) {
+        retVal = true;
+        break;
+      }
     }
     return retVal;
   }

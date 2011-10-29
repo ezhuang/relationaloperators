@@ -11,7 +11,6 @@ import index.HashScan;
  */
 public class KeyScan extends Iterator {
 
-  private Schema schema;
   private HashIndex index;
   private SearchKey key;
   private HeapFile file;
@@ -40,14 +39,14 @@ public class KeyScan extends Iterator {
    * child iterators, and increases the indent depth along the way.
    */
   public void explain(int depth) {
-    throw new UnsupportedOperationException("Not implemented");
+    System.out.println("KEY SCAN");
   }
 
   /**
    * Restarts the iterator, i.e. as if it were just constructed.
    */
   public void restart() {
-    scan.close();
+    if (null != scan) scan.close();
     init();
   }
 
@@ -70,7 +69,7 @@ public class KeyScan extends Iterator {
    * Returns true if there are more tuples, false otherwise.
    */
   public boolean hasNext() {
-    return isOpen ? scan.hasNext() : false;
+    return scan.hasNext();
   }
 
   /**
@@ -79,8 +78,9 @@ public class KeyScan extends Iterator {
    * @throws IllegalStateException if no more tuples
    */
   public Tuple getNext() {
-    if (false == hasNext()) throw new IllegalStateException();
-    return new Tuple(schema, file.selectRecord(scan.getNext()));
+    byte[] record = file.selectRecord(scan.getNext());
+    if (null == record) throw new IllegalStateException();
+    return new Tuple(schema, record);
   }
 
 } // public class KeyScan extends Iterator
