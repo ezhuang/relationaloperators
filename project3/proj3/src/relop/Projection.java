@@ -1,16 +1,24 @@
 package relop;
 
+import java.util.ArrayList;
+
 /**
  * The projection operator extracts columns from a relation; unlike in
  * relational algebra, this operator does NOT eliminate duplicate tuples.
  */
 public class Projection extends Iterator {
 
+  private Iterator iter;
+  private ArrayList<Integer> fields = new ArrayList<Integer>();
+
   /**
    * Constructs a projection, given the underlying iterator and field numbers.
    */
   public Projection(Iterator iter, Integer... fields) {
-    throw new UnsupportedOperationException("Not implemented");
+    this.iter = iter;
+    for (Integer i : fields) {
+      this.fields.add(i);
+    }
   }
 
   /**
@@ -18,7 +26,7 @@ public class Projection extends Iterator {
    * child iterators, and increases the indent depth along the way.
    */
   public void explain(int depth) {
-    throw new UnsupportedOperationException("Not implemented");
+    System.out.print("PROJECT ");
   }
 
   /**
