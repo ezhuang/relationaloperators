@@ -12,6 +12,7 @@ public class SimpleJoin extends Iterator {
   private boolean isOpen = false;
   private boolean foundNext = false;
   private Tuple next = null;
+  private Tuple lTuple = null;
   /**
    * Constructs a join, given the left and right iterators and join predicates
    * (relative to the combined schema).
@@ -20,6 +21,7 @@ public class SimpleJoin extends Iterator {
     this.left = left;
     this.right = right;
     this.preds = preds;
+    this.schema = Schema.join(left.schema, right.schema);
     init(); 
   }
 
@@ -28,6 +30,7 @@ public class SimpleJoin extends Iterator {
     right.restart();
     isOpen = true;
     next = null;
+    lTuple = null;
     foundNext = false;
   }
 
@@ -69,7 +72,8 @@ public class SimpleJoin extends Iterator {
    * Returns true if there are more tuples, false otherwise.
    */
   public boolean hasNext() {
-    throw new UnsupportedOperationException("Not implemented");
+    if (false == foundNext) findNext();
+    return foundNext;
   }
 
   /**
@@ -78,11 +82,60 @@ public class SimpleJoin extends Iterator {
    * @throws IllegalStateException if no more tuples
    */
   public Tuple getNext() {
-    throw new UnsupportedOperationException("Not implemented");
+    if (false == foundNext) {
+      findNext();
+    }
+    if (false == foundNext) throw new IllegalStateException();
+    foundNext = false;
+    return next;
   }
 
   private void findNext() {
+    foundNext = false;
+    Tuple rTuple = null;
+    
+    if (null == lTuple) {
+      if (true == left.hasNext()) 
+        lTuple = left.getNext();
+      else 
+        return;
+    }
 
+    if (right.hasNext()) {
+      rTuple = right.getNext();
+    }
+    else {
+      right.restart();
+      
+      if (right.hasNext()) 
+        rTuple = right.getNext();
+      else 
+        findNext();
+      
+      if (left.hasNext()) 
+        lTuple = left.getNext();
+      else
+        return;
+    }
+
+    Tuple t = Tuple.join(lTuple, rTuple, schema);
+    if (true == qualify(t)) {
+      next = t;
+      foundNext = true;
+    }
+    else
+      findNext();
+  }
+
+  private boolean qualify(Tuple t) {
+    boolean retVal = false;
+    for (Predicate p : preds) {
+      if(true == p.evaluate(t)) {
+        retVal = true;
+        break;
+      }
+    }
+    return retVal;
   }
 
 } // public class SimpleJoin extends Iterator
