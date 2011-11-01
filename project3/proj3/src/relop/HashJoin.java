@@ -32,6 +32,8 @@ public class HashJoin extends Iterator {
 		this.lcol = lcol; // = new Integer(lcol);
 		this.rcol = rcol; // = new Integer(rcol);
 		// throw new UnsupportedOperationException("Not implemented");
+    // Santhosh
+    this.schema = Schema.join(left.schema, right.schema);
 	}
 
 	public void hashAndSave(Iterator input, int colNo, HashTableDup ht) {
@@ -48,7 +50,7 @@ public class HashJoin extends Iterator {
 	 */
 	public void explain(int depth) {
 		indent(depth);
-		// System.out.print("SELECT");
+		System.out.print("HASH JOIN");
 		left.explain(depth + 1);
 		right.explain(depth + 1);
 		// throw new UnsupportedOperationException("Not implemented");
