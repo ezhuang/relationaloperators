@@ -1,6 +1,8 @@
 package relop;
 
+import global.RID;
 import global.SearchKey;
+import heap.HeapFile;
 import index.BucketScan;
 import index.HashIndex;
 
@@ -12,16 +14,29 @@ import index.HashIndex;
  */
 public class HashJoin extends Iterator {
 
+	private HeapFile file;
+	
+	private Tuple leftTuple = null;
 	private Iterator left = null;
 	private Iterator right = null;
 	private Integer lcol = null;
 	private Integer rcol = null;
+//	private Schema schema;
+	
+	private BucketScan leftBucketScan = null;
+	private BucketScan rightBucketScan = null;
+	private int leftHashKey = -1;
+	private int rightHashKey = -2;
 
-	private BucketScanWrapper leftBucketScan = null;
-	private BucketScanWrapper rightBucketScan = null;
+	private Tuple[] matchingTuples = null;
+	private int indexInTupleArray = 0;
 
-	private HashTableDup hashTabDupLeft = new HashTableDup();
-	private HashTableDup hashTabDupright = new HashTableDup();
+	private RID rightRIDToMatch = null;
+	private RID leftRIDToMatch = null;
+
+	private HashTableDup hashTableDup = null;
+	// private HashTableDup hashTabDupLeft = new HashTableDup();
+	// private HashTableDup hashTabDupright = new HashTableDup();
 
 	// TODO : Assume join is always equi
 	private boolean foundNext = false;
@@ -29,7 +44,12 @@ public class HashJoin extends Iterator {
 	private boolean isOpen = false;
 
 	private int fileNameCtr = 0;
+	private ScanType leftScanType = null;;
+	private ScanType rightScanType = null;
 
+	private Tuple nextTuple = null;
+
+	
 	/**
 	 * Constructs a hash join, given the left and right iterators and which
 	 * columns to match (relative to their individual schemas).
@@ -39,30 +59,43 @@ public class HashJoin extends Iterator {
 		// this.right = right;
 		this.lcol = lcol; // = new Integer(lcol);
 		this.rcol = rcol; // = new Integer(rcol);
-		createIndex(left, right, lcol, rcol);
-		
-		//TODO just assign ref or create new obj
+		leftScanType = ScanType.getScanType(left);
+		rightScanType = ScanType.getScanType(right);
+        this.schema = Schema.join(left.schema, right.schema);
+
+		createBucketScan(left, right, lcol, rcol);
+
+		// TODO just assign ref or create new obj
 		this.left = left;
 		this.right = right;
-		
-	}
-
-	public void createIndex(Iterator left, Iterator right, int lcol, int rcol) {
-		this.leftBucketScan = createBucketScan(left, lcol);
-		this.rightBucketScan = createBucketScan(right, rcol);
 
 	}
 
-	private BucketScanWrapper createBucketScan(Iterator iter, int col) {
-		if (iter instanceof FileScan) {
+	public void createBucketScan(Iterator left, Iterator right, int lcol,
+			int rcol) {
+
+		this.leftBucketScan = createBucketScan(left, lcol, leftScanType);
+		this.rightBucketScan = createBucketScan(right, rcol, rightScanType);
+
+	}
+
+	private BucketScan createBucketScan(Iterator iter, int col,
+			ScanType scanType) {
+		switch (scanType) {
+		case FILESCAN:
 			HashIndex hashIdx = new HashIndex("HashFileName" + fileNameCtr++);
 			hashAndSave(iter, col, hashIdx);
-			return new BucketScanWrapper(hashIdx);// hashIdx);
-		} else if (iter instanceof KeyScan) {
-			// TODO what if the KeyScan is on a diff column?
-			return new BucketScanWrapper(((KeyScan) iter).getHashIndex());
-		} else if (iter instanceof IndexScan) {
-			return new BucketScanWrapper(((IndexScan) iter).getHashIndex());
+			return hashIdx.openScan();
+			// break;
+		case KEYSCAN:
+			return (((KeyScan) iter).getHashIndex()).openScan();
+		case INDEXSCAN:
+			return ((IndexScan) iter).getHashIndex().openScan();
+		case HASHJOIN:
+			HashIndex joinHashIdx = new HashIndex("HashFileName" + fileNameCtr++);
+			hashAndSave(iter, col, joinHashIdx);
+			return joinHashIdx.openScan();
+			
 
 		}
 		return null;
@@ -77,6 +110,17 @@ public class HashJoin extends Iterator {
 				Object colVal = t.getField(colNo);
 				hd.insertEntry(new SearchKey(colVal), fs.getLastRID());
 			}
+		} else if (input instanceof HashJoin) {
+			HashJoin hj = (HashJoin) input;
+			HeapFile hf = new HeapFile("temp_file_join");
+			while (hj.hasNext()) {
+				Tuple t = input.getNext();
+				Object colVal = t.getField(colNo);
+				RID rid = hf.insertRecord(t.getData());
+				hd.insertEntry(new SearchKey(colVal), rid);
+			}
+			hj.setHeapFile(hf);
+			
 		} else {
 			throw new UnsupportedOperationException("Not implemented");
 		}
@@ -132,7 +176,8 @@ public class HashJoin extends Iterator {
 	 */
 	public boolean hasNext() {
 
-		throw new UnsupportedOperationException("Not implemented");
+		nextTuple = findNext();
+		return !(nextTuple == null);
 	}
 
 	/**
@@ -142,7 +187,142 @@ public class HashJoin extends Iterator {
 	 *             if no more tuples
 	 */
 	public Tuple getNext() {
-		throw new UnsupportedOperationException("Not implemented");
+		
+		return nextTuple;
 	}
 
+	public Tuple findNext() {
+
+		if (matchingTuples != null) {
+			indexInTupleArray ++;
+			if( indexInTupleArray < matchingTuples.length) {
+				//There are already records that exist that will match so just return the next one
+				Tuple joinedTuple = Tuple.join(leftTuple, matchingTuples[indexInTupleArray], schema);
+				return joinedTuple;
+			} else {
+				// This means all values for the current outer row is done processing
+				
+			}
+			
+		}
+		
+		// This means all values for the current outer row is done processing.
+		// Get the next value from left. If it has the same hash as the previous row, that 
+		//means they belong to the same bucket and the same HashDupTable can be used for rows in 
+		//rightScan
+		while (leftBucketScan.hasNext()) {
+
+//			leftHashKey = leftBucketScan.getNextHash();
+			int nextLeftHash = leftBucketScan.getNextHash();
+			leftRIDToMatch = leftBucketScan.getNext();
+			boolean newLeftHashId = true;
+			if (nextLeftHash == leftHashKey) {
+				newLeftHashId = false;
+			}
+
+			while (rightBucketScan.hasNext()) {
+				rightHashKey = rightBucketScan.getNextHash();
+				rightRIDToMatch = rightBucketScan.getNext();
+				if ( rightHashKey == leftHashKey)
+					break;
+			}
+			if (rightHashKey != leftHashKey) {
+				//get next row in left iter
+				continue;
+			}
+			// Both are pointing to the same bucket now..
+			switch (leftScanType) {
+			case FILESCAN:
+				leftTuple = new Tuple(left.schema, ((FileScan) left)
+						.getHeapFile().selectRecord(leftRIDToMatch));
+				break;
+			case KEYSCAN:
+				leftTuple = new Tuple(left.schema, ((KeyScan) left)
+						.getHeapFile().selectRecord(leftRIDToMatch));
+				break;
+			case INDEXSCAN:
+				leftTuple = new Tuple(left.schema, ((IndexScan) left)
+						.getHeapFile().selectRecord(leftRIDToMatch));
+				break;
+			case HASHJOIN:
+				leftTuple = new Tuple(left.schema, ((HashJoin) left)
+						.getHeapFile().selectRecord(leftRIDToMatch));
+				
+			}
+			if (newLeftHashId)
+				recreateHashDupForNewHash();
+			Object fieldVal = leftTuple.getField(lcol);
+			SearchKey sk = new SearchKey(fieldVal);
+			//All fields in hashTableDup with key = sk are matching the join.
+			matchingTuples = hashTableDup.getAll(sk);
+			//We have to return tuple 0 index must be incremented before next retrival
+			//TODO check if #tuples < index
+			indexInTupleArray = 0;
+			if (matchingTuples == null) {
+				System.out.println("No Matching keys found for " + fieldVal.toString());
+				return null;
+			}
+			Tuple joinedTuple = Tuple.join(leftTuple, matchingTuples[indexInTupleArray], schema);
+			return joinedTuple;
+			
+		}
+		//No matching tuple found
+		return null;
+
+	}
+
+	private void recreateHashDupForNewHash() {
+		hashTableDup = new HashTableDup();
+
+		while (leftHashKey == rightHashKey) {
+			// Take all rows with this hash key and save in Tuple[]
+			// read all right tuples hash and save in hashtable
+			Tuple rightTuple = null;
+			switch (rightScanType) {
+			case FILESCAN:
+				rightTuple = new Tuple(right.schema, ((FileScan) right)
+						.getHeapFile().selectRecord(rightRIDToMatch));
+				break;
+			case KEYSCAN:
+				rightTuple = new Tuple(right.schema, ((KeyScan) right)
+						.getHeapFile().selectRecord(rightRIDToMatch));
+				break;
+			case INDEXSCAN:
+				rightTuple = new Tuple(right.schema, ((IndexScan) right)
+						.getHeapFile().selectRecord(rightRIDToMatch));
+				break;
+			case HASHJOIN:
+				rightTuple = new Tuple(right.schema, ((HashJoin) right)
+						.getHeapFile().selectRecord(rightRIDToMatch));
+				break;				
+
+			}
+			Object fieldVal = rightTuple.getField(rcol);
+			SearchKey sk = new SearchKey(fieldVal);
+			hashTableDup.add(sk, rightTuple);
+			
+		}
+	}
+
+	public Tuple getNextTupleFromIter(Iterator it, ScanType scanType) {
+		switch (scanType) {
+		case FILESCAN:
+			return ((FileScan) it).getNext();
+		case KEYSCAN:
+			return ((KeyScan) it).getNext();
+		case INDEXSCAN:
+			((KeyScan) it).getNext();
+
+		}
+
+		return null;
+	}
+	
+	public void setHeapFile(HeapFile heap) {
+		this.file = heap;
+	}
+	
+	public HeapFile getHeapFile() {
+		return file;
+	}
 } // public class HashJoin extends Iterator
