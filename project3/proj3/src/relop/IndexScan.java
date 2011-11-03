@@ -37,7 +37,8 @@ public class IndexScan extends Iterator {
    * child iterators, and increases the indent depth along the way.
    */
   public void explain(int depth) {
-    throw new UnsupportedOperationException("Not implemented");
+		indent(depth);
+	    System.out.println("INDEX SCAN");
   }
 
   /**
@@ -95,5 +96,13 @@ public class IndexScan extends Iterator {
   public int getNextHash() {
     return scan.getNextHash();
   }
+
+  public HashIndex getHashIndex() {
+	  return index;
+  }
+
+  public HeapFile getHeapFile() {
+		return file;
+	}
 
 } // public class IndexScan extends Iterator
