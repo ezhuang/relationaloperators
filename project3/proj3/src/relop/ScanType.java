@@ -14,7 +14,7 @@ public enum ScanType {
 		} else if (scanObj instanceof HashJoin) {
 			return HASHJOIN;
 		}
-		throw new UnsupportedOperationException("Invalid Scan type" + scanObj.getClass());
+		return null;
 
 	}
 	
