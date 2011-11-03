@@ -32,7 +32,7 @@ public class Selection extends Iterator {
    */
   public void explain(int depth) {
     indent(depth);
-    System.out.print("SELECT");
+    System.out.println("SELECT");
     iter.explain(depth+1);
   }
 
