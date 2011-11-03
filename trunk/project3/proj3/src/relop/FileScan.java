@@ -88,4 +88,8 @@ public class FileScan extends Iterator {
     return lastRID;
   }
 
+	public HeapFile getHeapFile() {
+		return file;
+	}
+
 } // public class FileScan extends Iterator
