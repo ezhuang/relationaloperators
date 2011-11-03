@@ -39,6 +39,7 @@ public class KeyScan extends Iterator {
    * child iterators, and increases the indent depth along the way.
    */
   public void explain(int depth) {
+	indent(depth);
     System.out.println("KEY SCAN");
   }
 
@@ -82,5 +83,13 @@ public class KeyScan extends Iterator {
     if (null == record) throw new IllegalStateException();
     return new Tuple(schema, record);
   }
+  
+  public HashIndex getHashIndex() {
+	  return index;
+  }
+
+	public HeapFile getHeapFile() {
+		return file;
+	}
 
 } // public class KeyScan extends Iterator
