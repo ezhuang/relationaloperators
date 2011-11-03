@@ -201,7 +201,7 @@ public class HashJoin extends Iterator {
 
 	public Tuple findNext() {
 
-		if (matchingTuples != null) {
+		if (matchingTuples != null) { 
 			indexInTupleArray++;
 			if (indexInTupleArray < matchingTuples.length) {
 				// There are already records that exist that will match so just
@@ -218,17 +218,20 @@ public class HashJoin extends Iterator {
 		}
 		while (leftBucketScan.hasNext()) {
 
-			int nextLeftHash = leftBucketScan.getNextHash();
+			int prevLeftHash = leftHashKey;
+
+			leftHashKey = leftBucketScan.getNextHash();
 			leftTupleToMatch = leftBucketScan.getNext();
 			boolean newLeftHashId = true;
-			if (nextLeftHash == leftHashKey) {
+			if (prevLeftHash == leftHashKey) {
 				newLeftHashId = false;
 			}
-			leftHashKey = nextLeftHash;
 			boolean foundMatchingBucket = false;
 			if (newLeftHashId) {
 				foundMatchingBucket = recreateHashDupForNewHash();
-				// TODO may need to restart rightHashIndex here.
+				
+			} else {
+				foundMatchingBucket = true;
 			}
 
 			if (!foundMatchingBucket) {
