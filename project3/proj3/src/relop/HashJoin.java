@@ -118,7 +118,6 @@ public class HashJoin extends Iterator {
 				hd.insertEntry(new SearchKey(colVal), rid);
 				debugCounter++;
 			}
-			System.out.println(" #rows written dbcounter" + debugCounter);
 			hj.setHeapFile(hf);
 
 		} else {
@@ -265,9 +264,16 @@ public class HashJoin extends Iterator {
 		hashTableDup = new HashTableDup();
 		boolean trap = false;
 		//TODO replace this 
-		rightBucketScan.restart();
+//		rightBucketScan.restart();
 		//TODO need to reset iter ehre?
-		while (rightBucketScan.hasNext()) {
+		if (leftHashKey == rightHashKey && rightTupleToMatch != null) {
+			Object fieldVal = rightTupleToMatch.getField(rcol);
+			SearchKey sk = new SearchKey(fieldVal);
+			hashTableDup.add(sk, rightTupleToMatch);
+			trap = true;
+		}
+			
+			while (rightBucketScan.hasNext()) {
 			
 			rightHashKey = rightBucketScan.getNextHash();
 			rightTupleToMatch = rightBucketScan.getNext();
